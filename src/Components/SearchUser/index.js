@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './SearchUser.css';
 
 class SearchUser extends Component {
     constructor(props) {
@@ -14,14 +15,19 @@ class SearchUser extends Component {
         });
     };
 
+    onSubmitSearchUser = (e) => {
+        e.preventDefault();
+        this.props.fetchUser(this.state.search);
+    };
+
     render() {
         const {search} = this.state;
         return (
-            <div>
-                <form>
-                    <input name="search" value={search}  onChange={this.onSearchChange}/>
+            <div className="search">
+                <form onSubmit={this.onSubmitSearchUser}>
+                    <input name="search" placeholder="Enter username..." value={search} className="search__input" onChange={this.onSearchChange}/>
 
-                    <button type="submit" className="btn btn-primary">Search</button>
+                    <button type="submit" className="btn btn-primary search__btn">Search</button>
                 </form>
             </div>
         );
