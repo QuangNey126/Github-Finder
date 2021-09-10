@@ -4,7 +4,9 @@ import "./Navbar.css";
 
 const Navbar = () => {
     return <div className="navbar">
-        <p className="navbar__title">Github Finder</p>
+        <Link to="/">
+            <p className="navbar__title">Github Finder</p>
+        </Link>
         <ul>
             <li>
                 <Link to="/">Home</Link>

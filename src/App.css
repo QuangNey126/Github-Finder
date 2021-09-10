@@ -17,3 +17,7 @@ body {
 p {
   margin-bottom: 0;
 }
+
+a {
+  color: var(--white-color);
+}
