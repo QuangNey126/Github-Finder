@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import SearchUser from '../../Components/SearchUser';
 import UserAPI from '../../Services/user';
+
 import Users from '../../Components/Users';
 
-class Home extends Component {
+class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,25 +12,29 @@ class Home extends Component {
         };
     }
 
-    async componentDidMount() {
-        try {
-            const response = await UserAPI.fetchUsers();
+    fetchUser = async (search) => {
+        // Fetch User
+        try{
+            const response = await UserAPI.searchUser(search);
             this.setState({
-                users: response.data,
-            });
-        } catch (err) {
+                users: response.data.items,
+            })
+        } catch(err) {
             console.error(err);
         }
+
+        // Set State
     }
 
     render() {
         const { users } = this.state;
         return (
-            <div className="mt-3">
+            <div>
+                <SearchUser fetchUser={this.fetchUser}/>
                 <Users users={users} />
             </div>
         );
     }
 }
 
-export default Home;
+export default Search;
