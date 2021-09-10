@@ -9,13 +9,23 @@ class Search extends Component {
         super(props);
         this.state = {
             users: [],
+            isLoading: false,
         };
     }
 
     fetchUser = async (search) => {
         // Fetch User
-        try{
+        try {
+            // loading
+            this.setState({
+                isLoading: true,
+            });
             const response = await UserAPI.searchUser(search);
+            // !loading
+            this.setState({
+                isLoading: false,
+            });
+            
             this.setState({
                 users: response.data.items,
             })
@@ -27,11 +37,11 @@ class Search extends Component {
     }
 
     render() {
-        const { users } = this.state;
+        const { users, isLoading } = this.state;
         return (
             <div>
                 <SearchUser fetchUser={this.fetchUser}/>
-                <Users users={users} />
+                <Users users={users} isLoading={isLoading} />
             </div>
         );
     }

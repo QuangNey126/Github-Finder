@@ -7,14 +7,19 @@ class Home extends Component {
         super(props);
         this.state = {
             users: [],
+            isLoading: false,
         };
     }
 
     async componentDidMount() {
         try {
+            this.setState({
+                isLoading: true,
+            });
             const response = await UserAPI.fetchUsers();
             this.setState({
                 users: response.data,
+                isLoading: false,
             });
         } catch (err) {
             console.error(err);

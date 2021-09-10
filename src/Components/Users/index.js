@@ -1,9 +1,13 @@
-import React from 'react'; 
+import React from 'react';
+import Loading from '../Loading/Loading';
 import UserItem from '../UserItem';
 
 const Users = (props) => {
 
-    const {users} = props;
+    const { users, isLoading } = props;
+    if(isLoading) {
+        return <Loading />
+    }
     return (
         <div className="row">
             {users.map((userItem, index) => {
@@ -11,5 +15,7 @@ const Users = (props) => {
             })}
         </div>
     )
-}
+    
+};
+
 export default Users;
